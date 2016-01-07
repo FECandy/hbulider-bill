@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>消息页面</title>
+		<link rel="stylesheet" href="css/mui.css" />
+	</head>
+
+	<body>
+		<div class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<span class="mui-title">身份证号查询</span>
+			<a class="mui-icon-right-nav mui-pull-mui-pull-right"></a>
+		</div>
+
+		<div class="mui-content">
+			<div class="mui-content-padded mui-card" style="padding:1px;">
+				<button id="user-search" class="mui-btn mui-btn-primary mui-btn-block">查询</button>
+				<div class="mui-input-row">
+					<input type="search" id="user-id" value="522526199509261824" class="mui-input-clear" placeholder="身份证号码">
+				</div>
+				<div class="mui-input-row">
+					<label>地址</label>
+					<input id="user-address" value="" disabled="disabled" />
+				</div>
+				<div class="mui-input-row">
+					<label>性别</label>
+					<input id="user-sex" value="" disabled="disabled" />
+				</div>
+				<div class="mui-input-row">
+					<label>生日</label>
+					<input id="user-birthday" value="" disabled="disabled" />
+				</div>
+				<div class="mui-input-row">
+					<label>星座</label>
+					<input id="user-xz" value="" disabled="disabled" />
+				</div>
+				<div class="mui-text-center" style="margin:1px;">
+					<input type="button" class="xz-button" id="xz-today" name="today" value="日运势" />
+					<input type="button" class="xz-button" id="xz-week" name="week" value="周运势" />
+					<input type="button" class="xz-button" id="xz-nextweek" name="nextweek" value="下周运" />
+					<input type="button" class="xz-button" id="xz-month" name="month" value="月运" />
+					<input type="button" class="xz-button" id="xz-year" name="year" value="年运" />
+				</div>
+				<div id="xz-info">
+				</div>
+			</div>
+		</div>
+
+		<script id="today-template" type="text/x-handlebars-template">
+			<div class="mui-input-row">
+				<label> 幸运色</label>
+				<input type="text" value="{{color}}" disabled="disabled" />
+			</div>
+			<div class="mui-input-row">
+				<label> 健康指数 </label>
+				<input type="text" value="{{health}}" disabled="disabled" />
+			</div>
+			<div class="mui-input-row">
+				<label> 爱情指数 </label>
+				<input type="text" value="{{love}}" disabled="disabled" />
+			</div>
+			<div class="mui-input-row">
+				<label> 财运指数</label>
+				<input type="text" value="{{money}}" disabled="disabled" />
+			</div>
+			<div class="mui-input-row">
+				<label> 幸运数字</label>
+				<input type="text" value="{{number}}" disabled="disabled" />
+			</div>
+			<div class="mui-input-row">
+				<label> 速配星座</label>
+				<input type="text" value="{{OFriend}}" disabled="disabled" />
+			</div>
+			<div class="mui-input-row">
+				<label> 工作指数</label>
+				<input type="text" value="{{work}}" disabled="disabled" />
+			</div>
+			<div class="mui-text-center">
+				<label style="color:#F0AD4E"> 今日概述 </label>
+			</div>
+			<div class="mui-input-row" style="margin:10px 5px;">
+				<textarea id="xz-summary" rows="8" disabled="disabled"> {{summary}} </textarea>
+			</div>
+		</script>
+		
+		<script id="week-template" type="text/x-handlebars-template">
+			<div class="mui-text-center">
+				<label style="color:#F0AD4E">求职</label>
+			</div>
+			<div class="mui-input-row" style="margin:10px 5px;">
+				<textarea rows="5" disabled="disabled"> {{job}} </textarea>
+			</div>
+			<div class="mui-text-center">
+				<label style="color:#F0AD4E">健康</label>
+			</div>
+			<div class="mui-input-row" style="margin:10px 5px;">
+				<textarea rows="5" disabled="disabled"> {{health}} </textarea>
+			</div>
+			<div class="mui-text-center">
+				<label style="color:#F0AD4E">爱情</label>
+			</div>
+			<div class="mui-input-row" style="margin:10px 5px;">
+				<textarea rows="5" disabled="disabled"> {{love}} </textarea>
+			</div>
+			<div class="mui-text-center">
+				<label style="color:#F0AD4E">理财</label>
+			</div>
+			<div class="mui-input-row" style="margin:10px 5px;">
+				<textarea rows="5" disabled="disabled"> {{money}} </textarea>
+			</div>
+			<div class="mui-text-center">
+				<label style="color:#F0AD4E">工作</label>
+			</div>
+			<div class="mui-input-row" style="margin:10px 5px;">
+				<textarea rows="5" disabled="disabled"> {{work}} </textarea>
+			</div>
+		</script>
+		<script type="text/javascript" src="js/common.js" ></script>
+		<script type="text/javascript" src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+		<script type="text/javascript" src="js/handlebars-v3.0.0.js"></script>
+		<script type="text/javascript" src="js/XZUtil.js"></script>
+		<script type="text/javascript" src="js/DUtil.js"></script>
+		<script type="text/javascript" src="js/idcard-page.js"></script>
+	</body>
+
+</html>

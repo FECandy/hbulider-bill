@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>消息页面</title>
+		<link rel="stylesheet" href="css/mui.css" />
+		<link rel="stylesheet" href="css/image-view.css" />
+		<style>
+			.title {
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			
+			.oa-contact-cell.mui-table .mui-table-cell {
+				padding: 11px 0;
+				vertical-align: middle;
+			}
+			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}
+			
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			
+			.oa-contact-content {
+				width: 100%;
+			}
+			
+			.oa-contact-name {
+				margin-right: 20px;
+			}
+			
+			.oa-contact-name,
+			oa-contact-position {
+				float: left;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<span class="mui-title">main page</span>
+		</div>
+
+		<div class="mui-content">
+
+			<!--
+            	作者：FECandy@126.com
+            	时间：2015-11-20
+            	描述：主页面
+            -->
+			<div id="tabbar-with-content" class="mui-control-content mui-content-padded">
+				<div class="mui-button-row">
+					<button id="add-time" type="button" class="mui-btn mui-btn-block mui-btn-danger mui-btn-outlined">添加时间</button>
+				</div>
+				<div class="mui-input-row">
+					<input id="add-title" type="text" class="mui-input-clear" placeholder="待办事项标题" />
+				</div>
+				<div class="mui-input-row">
+					<textarea id="add-content" rows="14" placeholder="待办事项内容"></textarea>
+				</div>
+				<div class="mui-button-row">
+					<button id="add-button" class="mui-btn mui-btn-block mui-btn-primary addItemBtn">添加</button>
+				</div>
+			</div>
+
+			<!--
+            	作者：FECandy@126.com
+            	时间：2015-11-19
+            	描述：消息
+            -->
+			<div id="tabbar-with-chat" class="mui-control-content">
+
+			</div>
+			<script id="plan-list-template" type="text/x-handlebars-template">
+				<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+					{{#each plans}}
+					<li class="mui-table-view-cell list-li">
+						<div class="mui-slider-right mui-disabled">
+							<a class="mui-btn mui-btn-danger delete-btn" plan-id="{{id}}">删除</a>
+						</div>
+						<div class="mui-slider-handle">
+							<div class="mui-slider-cell">
+								<div class="mui-table">
+									<div class="mui-table-cell mui-col-xs-10">
+										<h4 class="mui-ellipsis">{{title}}</h4>
+										<h5>申请人：me</h5>
+										<p class="mui-h6 mui-ellipsis">{{content}}</p>
+									</div>
+									<div class="mui-table-cell mui-col-xs-2 mui-text-right">
+										<span class="mui-h6">{{time}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					{{/each}}
+				</ul>
+			</script>
+
+			<!--
+            	作者：FECandy@126.com
+            	时间：2015-11-19
+            	描述：通讯录
+            -->
+			<div id="tabbar-with-contact" class="mui-control-content">
+
+			</div>
+
+			<script id="people-template" type="text/x-handlebars-template">
+				<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+					{{#each peoples}}
+					<li class="mui-table-view-cell">
+						<div class="mui-slider-right mui-disabled">
+							<a class="mui-btn mui-btn-danger del-people">删除</a>
+						</div>
+						<div class="mui-slider-handle">
+							<div class="mui-slider-cell">
+								<div class="oa-contact-cell mui-table">
+									<div class="oa-contact-avatar mui-table-cell">
+										<p>
+											<img style="width:60px;height:60px;" src="{{image}}" data-preview-src="" data-preview-group="1" />
+										</p>
+									</div>
+									<div class="oa-contact-content mui-table-cell">
+										<div class="mui-clearfix">
+											<h4 class="oa-contact-name">{{name}}</h4>
+											<span class="oa-contact-position mui-h6">{{relation}}</span>
+										</div>
+										<p class="oa-contact-email mui-h5">
+											{{summary}}
+										</p>
+										<p class="oa-contact-email mui-h5">
+											{{phone}}@sina.com
+										</p>
+										<a href="tel:{{phone}}" class="oa-contact-email mui-h4">
+											{{phone}}
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					{{/each}}
+				</ul>
+			</script>
+
+			<!--
+            	作者：FECandy@126.com
+            	时间：2015-11-19
+            	描述：通讯录
+            -->
+			<div id="tabbar-with-people" class="mui-control-content mui-content-padded mui-active">
+				<div class="mui-button-row mui-text-center">
+					<img style="width: 60px;height: 60px;" id="people-img" path="" src="images/60x60.gif" />
+				</div>
+				<div class="mui-input-row">
+					<input id="people-name" type="text" class="mui-input-clear" placeholder="他叫什么" />
+				</div>
+				<div class="mui-input-row">
+					<input id="people-phone" type="number" class="mui-input-clear" placeholder="手机没有吗?" />
+				</div>
+				<div class="mui-input-row">
+					<input id="people-relation" type="text" class="mui-input-clear" placeholder="什么关系?" />
+				</div>
+				<div class="mui-input-row">
+					<textarea id="people-summary" rows="8" placeholder="有故事吗?"></textarea>
+				</div>
+				<div class="mui-button-row">
+					<button id="people-submit" class="mui-btn mui-btn-block mui-btn-primary addItemBtn">添加</button>
+				</div>
+			</div>
+
+			<!--
+            	作者：FECandy@126.com
+            	时间：2015-11-25
+            	描述：日期
+            -->
+		</div>
+
+		<!--
+        	作者：FECandy@126.com
+        	时间：2015-11-19
+        	描述：底部导航
+        -->
+		<nav class="mui-bar mui-bar-tab">
+			<a id="menu-data-add" class="mui-tab-item mui-active" href="#tabbar-with-content">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">新增</span>
+			</a>
+			<a id="menu-data-list" class="mui-tab-item" href="#tabbar-with-chat">
+				<span class="mui-icon mui-icon-email">
+					<span id="data-badge" class="mui-badge">0</span>
+				</span>
+				<span class="mui-tab-label">列表</span>
+			</a>
+			<a id="menu-data-people" class="mui-tab-item" href="#tabbar-with-contact">
+				<span class="mui-icon mui-icon-contact">
+					<span id="data-badge-contact" class="mui-badge">0</span>
+				</span>
+				<span class="mui-tab-label">知己</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-people">
+				<span class="mui-icon mui-icon-gear"></span>
+				<span class="mui-tab-label">OURS</span>
+			</a>
+		</nav>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/json2.js"></script>
+		<script type="text/javascript" src="js/data-base.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+		<script type="text/javascript" src="js/handlebars-v3.0.0.js"></script>
+		<script type="text/javascript" src="js/message.js"></script>
+		<script type="text/javascript" src="js/mui.zoom.js"></script>
+		<script type="text/javascript" src="js/mui.previewimage.js"></script>
+		<script>
+			mui.previewImage();
+		</script>
+	</body>
+
+</html>

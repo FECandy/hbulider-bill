@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>主页面</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="css/mui.css" />
+		<!--App自定义的css-->
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			.mui-bar~.mui-content .mui-fullscreen {
+				top: 44px;
+				height: auto;
+			}
+			
+			.mui-pull-top-tips {
+				position: absolute;
+				top: -20px;
+				left: 50%;
+				margin-left: -25px;
+				width: 40px;
+				height: 40px;
+				border-radius: 100%;
+			}
+			
+			.mui-bar~.mui-pull-top-tips {
+				top: 24px;
+			}
+			
+			.mui-pull-top-wrapper {
+				width: 42px;
+				height: 42px;
+				display: block;
+				text-align: center;
+				background-color: #efeff4;
+				border: 1px solid #ddd;
+				border-radius: 25px;
+				background-clip: padding-box;
+				box-shadow: 0 4px 10px #bbb;
+				overflow: hidden;
+			}
+			
+			.mui-pull-top-tips.mui-transitioning {
+				-webkit-transition-duration: 200ms;
+				transition-duration: 200ms;
+			}
+			
+			.mui-pull-top-tips .mui-pull-loading {
+				/*-webkit-backface-visibility: hidden;
+				-webkit-transition-duration: 400ms;
+				transition-duration: 400ms;*/
+				margin: 0;
+			}
+			
+			.mui-pull-top-wrapper .mui-icon,
+			.mui-pull-top-wrapper .mui-spinner {
+				margin-top: 7px;
+			}
+			
+			.mui-pull-top-wrapper .mui-icon.mui-reverse {
+				/*-webkit-transform: rotate(180deg) translateZ(0);*/
+			}
+			
+			.mui-pull-bottom-tips {
+				text-align: center;
+				background-color: #efeff4;
+				font-size: 15px;
+				line-height: 40px;
+				color: #777;
+			}
+			
+			.mui-pull-top-canvas {
+				overflow: hidden;
+				background-color: #fafafa;
+				border-radius: 40px;
+				box-shadow: 0 4px 10px #bbb;
+				width: 40px;
+				height: 40px;
+				margin: 0 auto;
+			}
+			
+			.mui-pull-top-canvas canvas {
+				width: 40px;
+			}
+			
+			.mui-slider-indicator.mui-segmented-control {
+				background-color: #efeff4;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">主页面</h1>
+			<a class="mui-icon mui-icon-bars mui-pull-right"></a>
+		</header>
+		<div class="mui-content">
+			<div style="padding: 20px 15px;">
+				<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-positive">
+					<a class="mui-control-item mui-active" href="#item1">待办公文（8）</a>
+					<a class="mui-control-item" href="#item2">已办公文</a>
+					<a class="mui-control-item" href="#item3">全部公文</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="mui-card mui-content" style="padding:0px 20px;">
+			<div id="item1" class="mui-control-content mui-active">
+				<!--数据列表-->
+				<ul class="mui-table-view mui-table-view-chevron" style="height: 500px; overflow:scroll;" >
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					<li class="mui-table-view-cell">
+						第一个选项卡子项-1
+					</li>
+					
+				</ul>
+			</div>
+
+			<div id="item2" class="mui-control-content">
+				<ul id="two-list" class="mui-table-view">
+					<li class="mui-table-view-cell">
+						第二个选项卡子项-2
+					</li>
+				</ul>
+			</div>
+			<div id="item3" class="mui-control-content">
+				<ul id="three-list" class="mui-table-view">
+					<li class="mui-table-view-cell">
+						第三个选项卡子项-3
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/handlebars-v3.0.0.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+
+	</body>
+
+</html>

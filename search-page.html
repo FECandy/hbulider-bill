@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="css/mui.min.css">
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<div class="mui-input-row mui-search">
+				<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="width:5%;display:block;"></span>
+				<input type="search" class="mui-input-clear" placeholder="搜索..." style="background-color:#E8E8E8;" />
+			</div>
+		</header>
+
+		<!--下拉刷新容器-->
+		<div id="data-list" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<ul id="data-list-ul" class="mui-table-view mui-table-view-chevron">
+					<li class-id="{{id}}" class="mui-table-view-cell mui-media">
+						<a href="javascript:;" class="mui-navigate-right">
+							<img class="mui-media-object mui-pull-left" src="{{image}}">
+							<div class="mui-media-body">
+								{{title}}
+								<p class='mui-ellipsis'>{{desc}}.</p>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<script id="data-template" type="text/x-handlebars-template">
+			<li class-id="{{id}}" class="mui-table-view-cell mui-media">
+				<a href="javascript:;" class="mui-navigate-right">
+					<img class="mui-media-object mui-pull-left" src="http://tnfs.tngou.net/image/{{image}}">
+					<div class="mui-media-body">
+						{{title}}
+						<p class='mui-ellipsis'>{{desc}}.</p>
+					</div>
+				</a>
+			</li>
+		</script>
+
+		<script src="js/mui.js"></script>
+		<script type="text/javascript" src="js/handlebars-v3.0.0.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+
+		<script>
+			(function($, JQuery) {
+				mui.init({
+					preloadPages: [{
+						id: 'register.html',
+						url: 'register.html'
+					}],
+					pullRefresh: {
+						container: '#data-list',
+						down: {
+							callback: downRefresh
+						},
+						up: {
+							contentrefresh: '正在加载...',
+							callback: upRefresh
+						}
+					}
+				});
+				$.plusReady(function() {
+					mui('#data-list').pullRefresh().pulldownLoading();
+				});
+				/**
+				 * 下拉刷新具体业务实现
+				 */
+				var id = 1;
+
+				function downRefresh() {
+					var httpURL = 'http://www.tngou.net/api/ask/list?id=' + id;
+					JQuery.ajax({
+						url: httpURL,
+						type: 'POST',
+						data: {},
+						dataType: "json",
+						success: function(resultData) {
+							if (resultData.status) {
+								var dataArray = resultData.tngou;
+								var size = dataArray.length;
+								for (var i = 0; i < size; i++) {
+									var obj = dataArray.pop();
+									var data = {
+										'id': obj.id,
+										'image': obj.img,
+										'title': obj.title,
+										'desc': obj.description
+									};
+									var dataTempl = document.getElementById('data-template').innerHTML;
+									var template = Handlebars.compile(dataTempl);
+									var li = JQuery('#data-list-ul').children().first();
+									JQuery(template(data)).insertBefore(JQuery(li));
+								}
+								id = id + 1;
+								detailsEvent();
+							}
+						},
+						error: function(XMLHttpRequest, textStatus, errorThrown) {
+							plus.nativeUI.toast(JSON.stringify(XMLHttpRequest.status + "::" + XMLHttpRequest.readyState + "::" + textStatus));
+						},
+						complete: function(XMLHttpRequest, textStatus) {}
+					});
+					mui('#data-list').pullRefresh().endPulldownToRefresh(); //refresh completed
+				};
+				var count = 0;
+				/**
+				 * 上拉加载具体业务实现
+				 */
+				function upRefresh() {
+					console.log('up refresh ...');
+					mui('#data-list').pullRefresh().endPullupToRefresh(true); //参数为true代表没有更多数据了。
+				};
+
+				function detailsEvent() {
+					//
+					JQuery('#data-list-ul').children().each(function(index, ele) {
+						var desID = JQuery(ele).attr('class-id');
+						ele.addEventListener('tap', null);
+						ele.addEventListener('tap', function() {
+							//获得详情页面
+							var regPage = $.preload({
+								"id": 'details.html',
+								"url": 'details.html'
+							});
+							//自定义一个事件，触发详情页面的showevent事件
+							$.fire(regPage, 'showdetail', {
+								id: desID
+							});
+							//打开详情页面
+							$.openWindow({
+								id: 'details.html',
+								waiting: {
+									autoShow: true
+								}
+							});
+						});
+					});
+				};
+			}(mui, jQuery));
+		</script>
+	</body>
+
+</html>

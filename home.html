@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>home</title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div id="gallery" class="mui-slider">
+			<div class="mui-slider-group">
+				<div class="mui-slider-item">
+					<ul class="mui-table-view mui-grid-view mui-grid-9">
+						<li id="home-main" class="mui-card mui-table-view-cell mui-media mui-col-xs-4" style="background-color:pink;margin:5px 5px 5px 10px;">
+							<a href="javascript:void(0);">
+								<span class="mui-icon mui-icon-home"><span class="mui-badge">5</span></span>
+								<div class="mui-media-body">
+									主页
+								</div>
+							</a>
+						</li>
+						<li id="home-idcard" class="mui-card mui-table-view-cell mui-media mui-col-xs-7" style="background-color:aquamarine;margin:5px 5px 5px 5px;">
+							<a href="javascript:void(0);">
+								<span class="mui-icon mui-icon-contact"></span>
+								<div class="mui-media-body">
+									ID卡
+								</div>
+							</a>
+						</li>
+						<li id="home-calendar" class="mui-card mui-table-view-cell mui-media mui-col-xs-6" style="background-color:#E8E8E8;margin:0px 5px 5px 5px;">
+							<a href="javascript:void(0);">
+								<span class="mui-icon mui-icon-checkbox"></span>
+								<div class="mui-media-body" id="calendar-time">
+									日历
+								</div>
+							</a>
+						</li>
+						<li id="home-chat" class="mui-card mui-table-view-cell mui-media mui-col-xs-5" style="background-color:antiquewhite;margin:0px 5px 5px 5px;">
+							<a href="javascript:void(0);">
+								<span class="mui-icon mui-icon-chat"></span>
+								<div class="mui-media-body">
+									Chat
+								</div>
+							</a>
+						</li>
+						<li id="home-downloader" class="mui-card mui-table-view-cell mui-media mui-col-xs-4" style="background-color:chocolate;margin:0px 5px 5px 5px;">
+							<a href="javascript:void(0);">
+								<span class="mui-icon mui-icon-chatboxes"></span>
+								<div class="mui-media-body">
+									Download ...
+								</div>
+							</a>
+						</li>
+						<li id="home-map" class="mui-card mui-table-view-cell mui-media mui-col-xs-7" style="background-color:khaki;margin:0px 5px 5px 5px;">
+							<a href="javascript:void(0);">
+								<span class="mui-icon mui-icon-map"></span>
+								<div class="mui-media-body">
+									Map
+								</div>
+							</a>
+						</li>
+						<li id="home-search" class="mui-card mui-table-view-cell mui-media mui-col-xs-5" style="background-color:khaki;margin:0px 5px 5px 5px;">
+							<a href="javascript:void(0);">
+								<span class="mui-icon mui-icon-search"></span>
+								<div class="mui-media-body">
+									Search
+								</div>
+							</a>
+						</li>
+						<li class="mui-card mui-table-view-cell mui-media mui-col-xs-6" style="background-color:lavender;margin:0px 5px 5px 5px;">
+							<a href="javascript:void(0);">
+								<span class="mui-icon mui-icon-phone"></span>
+								<div class="mui-media-body">
+									Phone
+								</div>
+							</a>
+						</li>
+						<li class="mui-card mui-table-view-cell mui-media mui-col-xs-5 mui-center" style="background-color:#C0C0C0;margin:15px;">
+							<a href="javascript:void(0);" style="height:140px;">
+								<span class="mui-icon mui-icon-settings"></span>
+								<div class="mui-media-body">
+									Setting
+								</div>
+							</a>
+						</li>
+						<li id="home-setting" class="mui-card mui-table-view-cell mui-media mui-col-xs-5" style="background-color:#F7F7F8;margin:15px;">
+							<a href="javascript:void(0);" style="height:140px;" class="mui-center">
+								<span class="mui-icon mui-icon-chatbubble"></span>
+								<div class="mui-media-body">
+									Setting
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div id="div-img">
+		</div>
+
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+		<script>
+			(function($) {
+				$.init({
+					statusBarBackground: '#FFFFFF'
+				});
+				$.plusReady(function() {
+					document.getElementById('home-chat').addEventListener('tap', function() {
+						$.openWindow({
+							id: 'detail-viwepager.html',
+							url: 'detail-viwepager.html'
+						});
+					});
+					/**
+					 * 省份证
+					 */
+					document.getElementById('home-idcard').addEventListener('tap', function() {
+						$.openWindow({
+							id: 'idcard-page.html',
+							url: 'idcard-page.html'
+						});
+					});
+					document.getElementById('home-main').addEventListener('tap', function() {
+						$.openWindow({
+							id: 'message.html',
+							url: 'message.html'
+						});
+					});
+					document.getElementById('home-setting').addEventListener('tap', function() {
+						$.openWindow({
+							id: 'setting.html',
+							url: 'setting.html'
+						});
+					});
+					document.getElementById('home-search').addEventListener('tap', function() {
+						$.openWindow({
+							id: 'search-page.html',
+							url: 'search-page.html'
+						});
+					});
+					document.getElementById('home-calendar').addEventListener('tap', function() {
+						var info = document.getElementById('calendar-time');
+						var dTime = new Date();
+						plus.nativeUI.pickTime(function(e) {
+							var d = e.date;
+							info.innerText = d.getHours() + ":" + d.getMinutes();
+						}, function(e) {
+							info.innerText = dTime.getHours() + ":" + dTime.getMinutes();
+						}, {
+							title: "请选择时间",
+							is24Hour: true,
+							time: dTime
+						});
+					});
+					////////////////////////////////
+					document.getElementById('home-downloader').addEventListener('tap', function() {
+						return false;
+						var imagePath = 'http://www.feizl.com/upload2007/2012_10/121004162928791.png';
+						// 创建下载任务
+						plus.downloader.createDownload(imagePath, {}, function(d, status) {
+							// 下载完成
+							if (status == 200) {
+								var sdPath = plus.io.convertLocalFileSystemURL(d.filename);
+								var h = document.getElementById('div-img').innerHTML;
+								document.getElementById('div-img').innerHTML = h + '<img src="' + sdPath + '"/>';
+								plus.io.resolveLocalFileSystemURL(sdPath, function(entry) {
+									entry.remove(function(entry) {
+										alert("文件删除成功==" + sdPath + ":" + entry);
+									}, function(e) {
+										alert("文件删除失败=" + sdPath + ":" + entry);
+									});
+								});
+							} else {
+								alert("Download failed: " + status);
+							}
+						}).start();
+					});
+				});
+			}(mui));
+		</script>
+	</body>
+
+</html>

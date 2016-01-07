@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">详情页面</h1>
+		</header>
+
+		<div class="mui-content mui-content-padded">
+			<div class="mui-slider" id="details-div">
+
+			</div>
+		</div>
+
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+		<script type="text/javascript" src="js/handlebars-v3.0.0.js"></script>
+		<script type="text/javascript">
+			(function($, JQuery, doc) {
+				$.plusReady(function() {
+					$.init({});
+					window.addEventListener('tomain', function(event) {
+						//获得事件参数
+						console.log(JSON.stringify(event));
+					});
+					//数据渲染
+					function renderData() {
+						alert(1)
+						//ajax获取数据信息
+						JQuery.ajax({
+							url: 'http://www.tngou.net/api/ask/list?id=2',
+							type: 'POST',
+							data: {},
+							dataType: "json",
+							success: function(resultData) {
+								console.log(JSON.stringify(resultData))
+							},
+							error: function(XMLHttpRequest, textStatus, errorThrown) {
+								plus.nativeUI.toast(JSON.stringify(XMLHttpRequest.status + "::" + XMLHttpRequest.readyState + "::" + textStatus));
+							},
+							complete: function(XMLHttpRequest, textStatus) {}
+						});
+					};
+					//详情页面
+					renderData();
+				});
+			}(mui, jQuery, document));
+		</script>
+
+	</body>
+
+</html>

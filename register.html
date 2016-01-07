@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>注册页面</title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<style>
+			.area {
+				margin: 20px auto 0px auto;
+			}
+			
+			.mui-input-group:first-child {
+				margin-top: 20px;
+			}
+			
+			.mui-input-group label {
+				width: 22%;
+			}
+			
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 78%;
+			}
+			
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: 6px;
+			}
+			
+			.mui-content-padded {
+				margin-top: 25px;
+			}
+			
+			.mui-btn {
+				padding: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">注册</h1>
+		</header>
+
+		<div class="mui-content">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>账号</label>
+					<input id='reg-account' type="text" class="mui-input-clear mui-input" placeholder="请输入账号">
+				</div>
+				<div class="mui-input-row">
+					<label>密码</label>
+					<input id='reg-passwd' type="password" class="mui-input-clear mui-input" placeholder="请输入密码">
+				</div>
+				<div class="mui-input-row">
+					<label>确认</label>
+					<input id='reg-confirm' type="password" class="mui-input-clear mui-input" placeholder="请确认密码">
+				</div>
+				<div class="mui-input-row">
+					<label>邮箱</label>
+					<input id='reg-email' type="email" class="mui-input-clear mui-input" placeholder="请输入邮箱">
+				</div>
+			</form>
+			<div class="mui-content-padded div-reg">
+				<button id='reg-user' class="mui-btn mui-btn-block mui-btn-primary">注册</button>
+			</div>
+			<div class="mui-content-padded">
+				<p>注册真实可用，注册成功后的用户可用于登录，但是示例程序并未和服务端交互，用户相关数据仅存储于本地。</p>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				$.plusReady(function() {
+					$.init({
+						//注册页面预加载
+						preloadPages: [{
+							id: 'login.html',
+							url: 'login.html'
+						}, {
+							id: 'main.html',
+							url: 'main.html'
+						}, ]
+					});
+					window.addEventListener('showevent', function(event) {
+						//获得事件参数
+						var id = event.detail.id;
+						plus.nativeUI.toast(JSON.stringify(event));
+					});
+					//注册按钮
+					$('.div-reg').on('tap', '#reg-user', function() {
+						userRegister();
+					});
+					//用户注册
+					function userRegister() {
+						var account = doc.getElementById('reg-account').value || '';
+						var passwd = doc.getElementById('reg-passwd').value || '';
+						var confirm = doc.getElementById('reg-confirm').value || '';
+						var email = doc.getElementById('reg-email').value || '';
+						if (passwd.length < 3) {
+							plus.nativeUI.alert("密码长度至少3位！");
+							return false;
+						} else if (passwd != confirm) {
+							plus.nativeUI.alert("两次密码不一致！");
+							return false;
+						} else if (email.indexOf('@') <= 0) {
+							plus.nativeUI.alert("用户邮箱不能为空！");
+							return false;
+						}
+						var bool = isExist(account);
+						if (bool == false) {
+							var isTrue = saveUser(account, passwd, email);
+							console.log(isTrue);
+						}
+					};
+					//用户是否存在
+					function isExist(account) {
+						var acc = account || '';
+						if (acc.length == '') {
+							plus.nativeUI.toast("用户名称至少6位!");
+							return false;
+						}
+						var users = localStorage.getItem("users") || "[]";
+						users = JSON.parse(users);
+						console.log(users);
+						console.log(typeof users);
+						var bool = users.some(function(user) {
+							if (user.account == acc) {
+								return true;
+							}
+						});
+						if (bool == true) {
+							plus.nativeUI.alert("该用户名称已经存在！", function() {
+								$.back();
+							}, "user exist", "OK");
+							return true;
+						}
+						return false;
+					};
+					//将用户存储到localStorage中去
+					function saveUser(account, passwd, email) {
+						var users = localStorage.getItem('users') || '[]';
+						console.log(JSON.stringify(users) + "[注册用户信息]");
+						users = JSON.parse(users);
+						var user = {
+							'account': account,
+							'password': passwd,
+							'email': email,
+							'isActive' : false
+						};
+						users.push(user);
+						localStorage.setItem('users', JSON.stringify(users));
+						// 弹出系统提示对话框
+						plus.nativeUI.alert("注册用户成功...", function() {
+							$.back();
+//							$.openWindow({id : "main.html",url : "main.html"});
+						}, "注册成功！", "注册成功，去登录");
+						return true;
+					};
+				});
+			}(mui, document));
+		</script>
+	</body>
+
+</html>
